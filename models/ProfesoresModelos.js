@@ -44,33 +44,48 @@ class ProfesoresModelos{
   
     
   }
+
   crear(usuario){
     return new Promise((resolve, reject) => {
-            usuario.id = uuidv4();
-            ProfesoresArr.push(usuario);
-            resolve();
+      let nombreUS = usuario.nombre
+      let CI_US = usuario.CI
+           let consulta = `INSERT INTO profesores (nombre,CI, id) VALUES ('${nombreUS}','${CI_US}',"")`
+           conexion.query(consulta,function(error,results,fields){
+            if(error){
+              reject(error)
+            }else{
+              resolve(results)
+            }
+           })
     })
   }
- modificar(idReq, nuevoNombre) {
-  return new Promise((resolve, reject) => {
-    for (let i = 0; i < ProfesoresArr.length; i++) {
-      if (idReq == ProfesoresArr[i].id) {
-        ProfesoresArr[i].nombre = nuevoNombre;
-        resolve(ProfesoresArr[i]);
-      }
+
+  modificar(idReq, nuevosValores) {
+    let nombreUs = nuevosValores.nombre
+    let Ci_Us = nuevosValores.CI
+    let consulta = `UPDATE profesores SET nombre = '${nombreUs}', CI ='${Ci_Us}' WHERE id = ${idReq}`
+    conexion.query(consulta,function(error,results,fields){
+      if(error){
+        reject(error)
+      }else{
+        resolve(results)
+     }
     }
-    ;
-  });
-}
+  )}
   
 eliminar(idElemento){
-  for(let i=0;i<ProfesoresArr.length;i++){
-    if(idElemento==ProfesoresArr[i].id){
-      let index = ProfesoresArr.indexOf(idElemento)
-      ProfesoresArr.splice(index,1);
-      return 1
-    }
-  }
+    return new Promise((resolve, reject) => {
+        let consulta = `DELETE FROM profesores WHERE id=${idElemento}`
+          conexion.query(consulta,function(error,results,fields){
+            if(error){
+              reject(error)
+            }else{
+              resolve(results)
+              conexion.end()
+            }
+          })
+         })
+
 
 
 }
