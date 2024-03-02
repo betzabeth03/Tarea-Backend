@@ -6,6 +6,8 @@ const SeccionesControladores = require('../controllers/SeccionesControladores');
 const EventosControlador = require('../controllers/EventosControlador');
 const EncuentrosControladores = require ('../controllers/EncuentrosControlador');
 const ActividadControladores = require ('../controllers/ActividadControlador');
+const conexion = require('../conexion')
+
 
 /* GET users listing. */
 router.get('/encuentros', function(req, res, next) {
@@ -331,5 +333,4 @@ ProfesoresControladores.eliminar(req.params.id)
           )})
           .catch((e) => console.error(e.message));
           })
-
 module.exports = router;

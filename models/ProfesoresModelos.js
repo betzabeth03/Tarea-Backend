@@ -23,7 +23,6 @@ class ProfesoresModelos{
         }else{
           ProfesoresArr = results
           resolve(ProfesoresArr)
-          conexion.end()
         }
       })
     });
@@ -37,7 +36,6 @@ class ProfesoresModelos{
           reject(error)
         }else{
           resolve(results)
-          conexion.end()
         }
       })
      })
@@ -49,7 +47,7 @@ class ProfesoresModelos{
     return new Promise((resolve, reject) => {
       let nombreUS = usuario.nombre
       let CI_US = usuario.CI
-           let consulta = `INSERT INTO profesores (nombre,CI, id) VALUES ('${nombreUS}','${CI_US}',"")`
+      let consulta = `INSERT INTO profesores (nombre,CI, id) VALUES ('${nombreUS}','${CI_US}',"")`
            conexion.query(consulta,function(error,results,fields){
             if(error){
               reject(error)
@@ -73,7 +71,7 @@ class ProfesoresModelos{
     }
   )}
   
-eliminar(idElemento){
+  eliminar(idElemento){
     return new Promise((resolve, reject) => {
         let consulta = `DELETE FROM profesores WHERE id=${idElemento}`
           conexion.query(consulta,function(error,results,fields){
@@ -85,10 +83,21 @@ eliminar(idElemento){
             }
           })
          })
-
-
-
+        }
 }
+eliminar(idElemento){
+  return new Promise((resolve,reject)=>{
+    let consulta = `DELETE FROM profesores WHERE id = ${idElemento}`
+    conexion.query(consulta,function(error,results,fields){
+      if(error){
+        reject(error)
+      }else{
+        resolve(results)
+      }
+    })
+  })
+}
+
 materiasAsociadasUno(idReq){
   for(let i=0;i<ProfesoresArr.length;i++){
     if(idReq==ProfesoresArr[i].id){
@@ -115,6 +124,7 @@ eliminarRelacion(idProf,idMateria){
       }
     }
   }
+}
 }
 }
 
