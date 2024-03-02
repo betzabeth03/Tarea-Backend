@@ -8,5 +8,5 @@ const conexion = mysql.createConnection({
 })
 conexion.connect()
 
-// module.exports = mysql
+// Prueba Rachel
 module.exports = conexion
