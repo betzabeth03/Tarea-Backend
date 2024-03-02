@@ -25,10 +25,10 @@ class MateriasControladores{
   
       })
     }
-    crear(usuario){
+    crear(registro){
       return new Promise((resolve, reject) =>{
         //resolve(MateriasModelos.crear(usuario));
-        let prueba= MateriasModelos.crear(usuario);
+        let prueba= MateriasModelos.crear(registro);
         if(prueba){
           resolve(prueba);
         } else {
@@ -38,10 +38,9 @@ class MateriasControladores{
     })
       
     }
-    modificar(idReq, nuevoNombre){
+    modificar(idReq, nuevosValores){
       return new Promise((resolve, reject) => {   
-        //resolve(MateriasModelos.modificar(idReq, nuevoNombre));
-        let prueba= MateriasModelos.modificar(idReq,nuevoNombre);
+        let prueba= MateriasModelos.modificar(idReq,nuevosValores);
         if(prueba){
           resolve(prueba);
         } else {
