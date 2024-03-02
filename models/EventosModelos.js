@@ -16,7 +16,19 @@ let EventosArr =[
 ]
  class EventosModelos{
     todos() {
-        return EventosArr;
+      return new Promise((resolve,reject)=>{
+        let consulta = "SELECT * FROM eventos"
+        conexion.query(consulta,function(error,results,fields){
+          if(error){
+           reject(error)
+          }else{
+            EventosArr = results
+            resolve(EventosArr)
+            conexion.end()
+          }
+        })
+      });
+
       }
       crear(usuario){
         return new Promise((resolve, reject) => {
@@ -49,24 +61,65 @@ let EventosArr =[
   return eventosProximos;
 }
 
+uno(idReq) {
     
-    uno(idReq) {
+  return new Promise((resolve,reject)=>{
+   let consulta = `SELECT  * FROM eventos WHERE id=${idReq}`
+   conexion.query(consulta,function(error,results,fields){
+     if(error){
+       reject(error)
+     }else{
+       resolve(results)
+       conexion.end()
+     }
+   })
+  })
+
+ 
+}
+    
+/*    uno(idReq) {
       return new Promise((resolve, reject) => {
         for(let i=0;i<EventosArr.length;i++){
           if(idReq==EventosArr[i].id){
             return EventosArrArr[i]
           }
         }})
-    } 
-    eliminar(idReq){
-      for(let i=0;i<EventosArr.length;i++){
-        if(idReq==EventosArr[i].id){
-          let index = EventosArr.indexOf(idReq)
-          EventosArr.splice(index,1);
-          return 1
-        }
+    } */
+
+    
+    eliminar(idElemento){
+      return new Promise((resolve, reject) => {
+          let consulta = `DELETE FROM eventos WHERE id=${idElemento}`
+            conexion.query(consulta,function(error,results,fields){
+              if(error){
+                reject(error)
+              }else{
+                resolve(results)
+                conexion.end()
+              }
+            })
+           })
+          }
+  
+  
+
+    modificar(idReq, nuevosValores) {
+      let nombreEv = nuevosValores.nombre
+      let tipoEv = nuevosValores.tipoEv
+      let fechaEv = nuevosValores.Ev
+      let consulta = `UPDATE eventos SET nombre = '${nombreEv}', tipo = ${tipoEv}, fecha = ${fechaEv} WHERE id = ${idReq}`
+      conexion.query(consulta,function(error,results,fields){
+        if(error){
+          reject(error)
+        }else{
+          resolve(results)
+       }
       }
-    } 
+    )}
+    
+
+    /*
      modificar(idReq, nuevoNombre) {
   return new Promise((resolve, reject) => {
     for (let i = 0; i < EventosArr.length; i++) {
@@ -78,8 +131,9 @@ let EventosArr =[
     ;
   });
 }
-}
- 
+
+ */
+ }
 
 
 
