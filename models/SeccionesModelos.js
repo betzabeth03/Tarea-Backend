@@ -26,6 +26,7 @@ class SeccionesModelos{
     });
   }
   
+
   uno(idReq) { 
     return new Promise((resolve,reject)=>{
       let consulta = `SELECT  * FROM secciones WHERE id=${idReq}`
@@ -85,5 +86,6 @@ class SeccionesModelos{
   
 
 }
+//
 
 module.exports = new SeccionesModelos(); 

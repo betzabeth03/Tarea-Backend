@@ -85,7 +85,7 @@ class ProfesoresModelos{
          })
         }
 }
-eliminar(idElemento){
+eliminar(idElemento);{
   return new Promise((resolve,reject)=>{
     let consulta = `DELETE FROM profesores WHERE id = ${idElemento}`
     conexion.query(consulta,function(error,results,fields){
@@ -98,21 +98,21 @@ eliminar(idElemento){
   })
 }
 
-materiasAsociadasUno(idReq){
+materiasAsociadasUno(idReq);{
   for(let i=0;i<ProfesoresArr.length;i++){
     if(idReq==ProfesoresArr[i].id){
       return "El profesor "+ProfesoresArr[i].nombre +" Da clases en las materias con Id:  " + ProfesoresArr[i].materias
     }
   }
 }
-materiasAsociadasTodos(){
+materiasAsociadasTodos();{
   ArrTemp = []
   for(let i=0;i<ProfesoresArr.length;i++){
     ArrTemp.push("El profesor "+ProfesoresArr[i].nombre +" Da clases en las materias con Id:  " + ProfesoresArr[i].materias)
   }
   return ArrTemp
 }
-eliminarRelacion(idProf,idMateria){
+eliminarRelacion(idProf,idMateria);{
   for(let i=0;i<ProfesoresArr.length;i++){
     if(idProf==ProfesoresArr[i].id){
       for(let j=0;j<ProfesoresArr[i].materias.length;j++){
@@ -124,8 +124,6 @@ eliminarRelacion(idProf,idMateria){
       }
     }
   }
-}
-}
 }
 
 module.exports = new ProfesoresModelos(); 

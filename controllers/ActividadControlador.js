@@ -1,6 +1,6 @@
 var ActividadModelos = require("../models/ActividadModelos");
 
-
+//
 class ActividadControladores{
     todos(){
       return new Promise((resolve, reject) => {   
